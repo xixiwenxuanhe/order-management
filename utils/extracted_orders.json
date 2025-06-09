@@ -1,0 +1,826 @@
+{
+  "extractTime": "2025-06-09T21:09:11.898511",
+  "totalOrders": 10,
+  "originalMessage": "ok",
+  "orders": [
+    {
+      "orderId": "872635018392172083",
+      "status": {
+        "name": "待卖家发货",
+        "key": "WAIT_SELLER_SEND_GOODS"
+      },
+      "orderType": {
+        "name": "闲置",
+        "key": "C2C"
+      },
+      "createdAt": "1749448173",
+      "paidAt": "1749448178",
+      "deliverPattern": {
+        "name": "直接物流发货",
+        "key": "EXPRESS"
+      },
+      "buyer": {
+        "id": "539529582655676884",
+        "name": "可以收货放心",
+        "phone": "+86 181****562"
+      },
+      "seller": {
+        "id": "557018809744063624",
+        "name": "Johnny_yang",
+        "phone": "+86 159****736"
+      },
+      "receiver": {
+        "name": "杯子",
+        "phone": "18137786562",
+        "address": "经北五路777号抖富科技2楼电梯北边777房间（原202房间），送货上门",
+        "province": "河南省",
+        "city": "郑州市",
+        "district": "管城回族区"
+      },
+      "pricing": {
+        "orderPrice": 130,
+        "expressPrice": 10,
+        "paidPrice": 130,
+        "originalPrice": 130,
+        "afterDiscountPrice": 130
+      },
+      "products": [
+        {
+          "productId": "870547812431985805",
+          "productName": "美滋滋",
+          "unitPrice": 120,
+          "amount": 1,
+          "totalPrice": 120,
+          "description": "只是打开看就放回袋子了",
+          "specValues": [
+            {
+              "id": "1",
+              "name": "来源",
+              "value": "现货",
+              "color": "#5077D9",
+              "labelColor": "#E4EBF9"
+            },
+            {
+              "id": "5",
+              "name": "状态",
+              "value": "已拆袋",
+              "color": "#D65D11",
+              "labelColor": "#FFF0E6"
+            }
+          ]
+        }
+      ],
+      "availableActions": [
+        {
+          "action": "OrderAction_APPLY_REFUND",
+          "actionName": "申请退款"
+        }
+      ],
+      "productNum": "1",
+      "relatedId": "870547811358231998",
+      "relatedType": "C2C",
+      "expiredAt": "0"
+    },
+    {
+      "orderId": "872634929271544125",
+      "status": {
+        "name": "待卖家发货",
+        "key": "WAIT_SELLER_SEND_GOODS"
+      },
+      "orderType": {
+        "name": "闲置",
+        "key": "C2C"
+      },
+      "createdAt": "1749448152",
+      "paidAt": "1749448158",
+      "deliverPattern": {
+        "name": "直接物流发货",
+        "key": "EXPRESS"
+      },
+      "buyer": {
+        "id": "539529582655676884",
+        "name": "可以收货放心",
+        "phone": "+86 181****562"
+      },
+      "seller": {
+        "id": "703582893682962855",
+        "name": "诗",
+        "phone": "+86 173****231"
+      },
+      "receiver": {
+        "name": "杯子",
+        "phone": "18137786562",
+        "address": "经北五路777号抖富科技2楼电梯北边777房间（原202房间），送货上门",
+        "province": "河南省",
+        "city": "郑州市",
+        "district": "管城回族区"
+      },
+      "pricing": {
+        "orderPrice": 248,
+        "expressPrice": 8,
+        "paidPrice": 248,
+        "originalPrice": 248,
+        "afterDiscountPrice": 248
+      },
+      "products": [
+        {
+          "productId": "871192248652427680",
+          "productName": "美滋滋",
+          "unitPrice": 120,
+          "amount": 1,
+          "totalPrice": 120,
+          "description": " ",
+          "specValues": [
+            {
+              "id": "1",
+              "name": "来源",
+              "value": "现货",
+              "color": "#5077D9",
+              "labelColor": "#E4EBF9"
+            },
+            {
+              "id": "5",
+              "name": "状态",
+              "value": "已拆袋",
+              "color": "#D65D11",
+              "labelColor": "#FFF0E6"
+            }
+          ]
+        },
+        {
+          "productId": "871192176711735572",
+          "productName": "乐呵呵",
+          "unitPrice": 120,
+          "amount": 1,
+          "totalPrice": 120,
+          "description": " ",
+          "specValues": [
+            {
+              "id": "1",
+              "name": "来源",
+              "value": "现货",
+              "color": "#5077D9",
+              "labelColor": "#E4EBF9"
+            },
+            {
+              "id": "5",
+              "name": "状态",
+              "value": "已拆袋",
+              "color": "#D65D11",
+              "labelColor": "#FFF0E6"
+            }
+          ]
+        }
+      ],
+      "availableActions": [
+        {
+          "action": "OrderAction_APPLY_REFUND",
+          "actionName": "申请退款"
+        }
+      ],
+      "productNum": "2",
+      "relatedId": "871192245431220084",
+      "relatedType": "C2C",
+      "expiredAt": "0"
+    },
+    {
+      "orderId": "872634849814698421",
+      "status": {
+        "name": "待买家收货",
+        "key": "WAIT_BUYER_CONFIRM_GOODS"
+      },
+      "orderType": {
+        "name": "闲置",
+        "key": "C2C"
+      },
+      "createdAt": "1749448133",
+      "paidAt": "1749448140",
+      "deliverPattern": {
+        "name": "直接物流发货",
+        "key": "EXPRESS"
+      },
+      "buyer": {
+        "id": "539529582655676884",
+        "name": "可以收货放心",
+        "phone": "+86 181****562"
+      },
+      "seller": {
+        "id": "367574803122612039",
+        "name": "贩卖快乐🤩",
+        "phone": "+86 151****757"
+      },
+      "receiver": {
+        "name": "杯子",
+        "phone": "18137786562",
+        "address": "经北五路777号抖富科技2楼电梯北边777房间（原202房间），送货上门",
+        "province": "河南省",
+        "city": "郑州市",
+        "district": "管城回族区"
+      },
+      "pricing": {
+        "orderPrice": 132,
+        "expressPrice": 12,
+        "paidPrice": 132,
+        "originalPrice": 132,
+        "afterDiscountPrice": 132
+      },
+      "products": [
+        {
+          "productId": "871783065427432195",
+          "productName": "美滋滋",
+          "unitPrice": 120,
+          "amount": 1,
+          "totalPrice": 120,
+          "description": "仅拆袋",
+          "specValues": [
+            {
+              "id": "1",
+              "name": "来源",
+              "value": "现货",
+              "color": "#5077D9",
+              "labelColor": "#E4EBF9"
+            },
+            {
+              "id": "5",
+              "name": "状态",
+              "value": "已拆袋",
+              "color": "#D65D11",
+              "labelColor": "#FFF0E6"
+            }
+          ]
+        }
+      ],
+      "availableActions": [
+        {
+          "action": "OrderAction_APPLY_REFUND",
+          "actionName": "申请退款"
+        },
+        {
+          "action": "OrderAction_DELAY_CONFIRM",
+          "actionName": "延长收货"
+        },
+        {
+          "action": "OrderAction_CONFIRM",
+          "actionName": "确认收货"
+        },
+        {
+          "action": "OrderAction_EXPRESS",
+          "actionName": "物流详情"
+        },
+        {
+          "action": "OrderAction_SHARE_ORDER",
+          "actionName": "标记拥有"
+        }
+      ],
+      "productNum": "1",
+      "relatedId": "871783064353696127",
+      "relatedType": "C2C",
+      "expiredAt": "1750318610"
+    },
+    {
+      "orderId": "872634501922316575",
+      "status": {
+        "name": "待买家付款",
+        "key": "WAIT_BUYER_PAY"
+      },
+      "orderType": {
+        "name": "闲置",
+        "key": "C2C"
+      },
+      "createdAt": "1749448052",
+      "paidAt": "0",
+      "deliverPattern": {
+        "name": "直接物流发货",
+        "key": "EXPRESS"
+      },
+      "buyer": {
+        "id": "539529582655676884",
+        "name": "可以收货放心",
+        "phone": "+86 181****562"
+      },
+      "seller": {
+        "id": "636987140835702326",
+        "name": "枫枫小树",
+        "phone": "+86 139****284"
+      },
+      "receiver": {
+        "name": "杯子",
+        "phone": "18137786562",
+        "address": "经北五路777号抖富科技2楼电梯北边777房间（原202房间），送货上门",
+        "province": "河南省",
+        "city": "郑州市",
+        "district": "管城回族区"
+      },
+      "pricing": {
+        "orderPrice": 115,
+        "expressPrice": 0,
+        "paidPrice": 0,
+        "originalPrice": 115,
+        "afterDiscountPrice": 115
+      },
+      "products": [
+        {
+          "productId": "776707468192441934",
+          "productName": "美滋滋",
+          "unitPrice": 115,
+          "amount": 1,
+          "totalPrice": 115,
+          "description": "盒卡齐，就拿出来看过，未把玩，主页两单包邮非偏远",
+          "specValues": [
+            {
+              "id": "1",
+              "name": "来源",
+              "value": "现货",
+              "color": "#5077D9",
+              "labelColor": "#E4EBF9"
+            },
+            {
+              "id": "5",
+              "name": "状态",
+              "value": "已拆袋",
+              "color": "#D65D11",
+              "labelColor": "#FFF0E6"
+            }
+          ]
+        }
+      ],
+      "availableActions": [
+        {
+          "action": "OrderAction_PAY",
+          "actionName": "立即支付"
+        },
+        {
+          "action": "OrderAction_CANCEL",
+          "actionName": "取消订单"
+        },
+        {
+          "action": "OrderAction_CHANGE_ADDRESS",
+          "actionName": "修改地址"
+        }
+      ],
+      "productNum": "1",
+      "relatedId": "776707466044928419",
+      "relatedType": "C2C",
+      "expiredAt": "1749534452"
+    },
+    {
+      "orderId": "872634332271103723",
+      "status": {
+        "name": "待卖家发货",
+        "key": "WAIT_SELLER_SEND_GOODS"
+      },
+      "orderType": {
+        "name": "闲置",
+        "key": "C2C"
+      },
+      "createdAt": "1749448013",
+      "paidAt": "1749448020",
+      "deliverPattern": {
+        "name": "直接物流发货",
+        "key": "EXPRESS"
+      },
+      "buyer": {
+        "id": "539529582655676884",
+        "name": "可以收货放心",
+        "phone": "+86 181****562"
+      },
+      "seller": {
+        "id": "686375218880447782",
+        "name": "性感奶妈",
+        "phone": "+86 173****783"
+      },
+      "receiver": {
+        "name": "杯子",
+        "phone": "18137786562",
+        "address": "经北五路777号抖富科技2楼电梯北边777房间（原202房间），送货上门",
+        "province": "河南省",
+        "city": "郑州市",
+        "district": "管城回族区"
+      },
+      "pricing": {
+        "orderPrice": 123,
+        "expressPrice": 8,
+        "paidPrice": 123,
+        "originalPrice": 123,
+        "afterDiscountPrice": 123
+      },
+      "products": [
+        {
+          "productId": "871921712340432138",
+          "productName": "美滋滋",
+          "unitPrice": 115,
+          "amount": 1,
+          "totalPrice": 115,
+          "description": "",
+          "specValues": [
+            {
+              "id": "1",
+              "name": "来源",
+              "value": "现货",
+              "color": "#5077D9",
+              "labelColor": "#E4EBF9"
+            },
+            {
+              "id": "5",
+              "name": "状态",
+              "value": "已拆袋",
+              "color": "#D65D11",
+              "labelColor": "#FFF0E6"
+            }
+          ]
+        }
+      ],
+      "availableActions": [
+        {
+          "action": "OrderAction_APPLY_REFUND",
+          "actionName": "申请退款"
+        }
+      ],
+      "productNum": "1",
+      "relatedId": "871921712340432129",
+      "relatedType": "C2C",
+      "expiredAt": "0"
+    },
+    {
+      "orderId": "872634218454450763",
+      "status": {
+        "name": "待卖家发货",
+        "key": "WAIT_SELLER_SEND_GOODS"
+      },
+      "orderType": {
+        "name": "闲置",
+        "key": "C2C"
+      },
+      "createdAt": "1749447986",
+      "paidAt": "1749447997",
+      "deliverPattern": {
+        "name": "直接物流发货",
+        "key": "EXPRESS"
+      },
+      "buyer": {
+        "id": "539529582655676884",
+        "name": "可以收货放心",
+        "phone": "+86 181****562"
+      },
+      "seller": {
+        "id": "360480144214837229",
+        "name": "labubu守护者",
+        "phone": "+86 198****189"
+      },
+      "receiver": {
+        "name": "杯子",
+        "phone": "18137786562",
+        "address": "经北五路777号抖富科技2楼电梯北边777房间（原202房间），送货上门",
+        "province": "河南省",
+        "city": "郑州市",
+        "district": "管城回族区"
+      },
+      "pricing": {
+        "orderPrice": 120,
+        "expressPrice": 10,
+        "paidPrice": 120,
+        "originalPrice": 120,
+        "afterDiscountPrice": 120
+      },
+      "products": [
+        {
+          "productId": "872574428184093945",
+          "productName": "美滋滋",
+          "unitPrice": 110,
+          "amount": 1,
+          "totalPrice": 110,
+          "description": "有盒无卡，有官方验证码，保真",
+          "specValues": [
+            {
+              "id": "1",
+              "name": "来源",
+              "value": "现货",
+              "color": "#5077D9",
+              "labelColor": "#E4EBF9"
+            },
+            {
+              "id": "5",
+              "name": "状态",
+              "value": "已拆袋",
+              "color": "#D65D11",
+              "labelColor": "#FFF0E6"
+            }
+          ]
+        }
+      ],
+      "availableActions": [
+        {
+          "action": "OrderAction_APPLY_REFUND",
+          "actionName": "申请退款"
+        }
+      ],
+      "productNum": "1",
+      "relatedId": "872574428184093928",
+      "relatedType": "C2C",
+      "expiredAt": "0"
+    },
+    {
+      "orderId": "872634092826685433",
+      "status": {
+        "name": "待卖家发货",
+        "key": "WAIT_SELLER_SEND_GOODS"
+      },
+      "orderType": {
+        "name": "闲置",
+        "key": "C2C"
+      },
+      "createdAt": "1749447958",
+      "paidAt": "1749447965",
+      "deliverPattern": {
+        "name": "直接物流发货",
+        "key": "EXPRESS"
+      },
+      "buyer": {
+        "id": "539529582655676884",
+        "name": "可以收货放心",
+        "phone": "+86 181****562"
+      },
+      "seller": {
+        "id": "839424962207980427",
+        "name": "爱吃糖葫芦",
+        "phone": "+86 195****108"
+      },
+      "receiver": {
+        "name": "杯子",
+        "phone": "18137786562",
+        "address": "经北五路777号抖富科技2楼电梯北边777房间（原202房间），送货上门",
+        "province": "河南省",
+        "city": "郑州市",
+        "district": "管城回族区"
+      },
+      "pricing": {
+        "orderPrice": 119,
+        "expressPrice": 10,
+        "paidPrice": 119,
+        "originalPrice": 119,
+        "afterDiscountPrice": 119
+      },
+      "products": [
+        {
+          "productId": "872280057568070571",
+          "productName": "美滋滋",
+          "unitPrice": 109,
+          "amount": 1,
+          "totalPrice": 109,
+          "description": "无盒卡，保正品随便验，很新",
+          "specValues": [
+            {
+              "id": "1",
+              "name": "来源",
+              "value": "现货",
+              "color": "#5077D9",
+              "labelColor": "#E4EBF9"
+            },
+            {
+              "id": "5",
+              "name": "状态",
+              "value": "已拆袋",
+              "color": "#D65D11",
+              "labelColor": "#FFF0E6"
+            }
+          ]
+        }
+      ],
+      "availableActions": [
+        {
+          "action": "OrderAction_APPLY_REFUND",
+          "actionName": "申请退款"
+        }
+      ],
+      "productNum": "1",
+      "relatedId": "872280056494352045",
+      "relatedType": "C2C",
+      "expiredAt": "0"
+    },
+    {
+      "orderId": "872633939281615193",
+      "status": {
+        "name": "交易成功",
+        "key": "BUYER_CONFIRM_GOODS"
+      },
+      "orderType": {
+        "name": "闪购",
+        "key": "EXCHANGE"
+      },
+      "createdAt": "1749447921",
+      "paidAt": "1749447930",
+      "deliverPattern": {
+        "name": "入寄存柜",
+        "key": "HOST"
+      },
+      "buyer": {
+        "id": "539529582655676884",
+        "name": "可以收货放心",
+        "phone": "+86 181****562"
+      },
+      "seller": {
+        "id": "1",
+        "name": "***3",
+        "phone": ""
+      },
+      "receiver": {
+        "name": "",
+        "phone": "",
+        "address": "",
+        "province": "",
+        "city": "",
+        "district": ""
+      },
+      "pricing": {
+        "orderPrice": 157,
+        "expressPrice": 0,
+        "paidPrice": 157,
+        "originalPrice": 157,
+        "afterDiscountPrice": 157
+      },
+      "products": [
+        {
+          "productId": "748658708598359072",
+          "productName": "甜丝丝",
+          "unitPrice": 157,
+          "amount": 1,
+          "totalPrice": 157,
+          "description": "",
+          "specValues": [
+            {
+              "id": "163888",
+              "name": "状态",
+              "value": "拆袋已鉴别",
+              "color": "#C74A88",
+              "labelColor": "#F7DFEC"
+            }
+          ]
+        }
+      ],
+      "availableActions": [
+        {
+          "action": "OrderAction_APPLY_REFUND",
+          "actionName": "申请退款"
+        },
+        {
+          "action": "OrderAction_SHARE_ORDER",
+          "actionName": "标记拥有"
+        }
+      ],
+      "productNum": "1",
+      "relatedId": "872610592882466373",
+      "relatedType": "EXCHANGE",
+      "expiredAt": "0"
+    },
+    {
+      "orderId": "872633939281615192",
+      "status": {
+        "name": "交易成功",
+        "key": "BUYER_CONFIRM_GOODS"
+      },
+      "orderType": {
+        "name": "闪购",
+        "key": "EXCHANGE"
+      },
+      "createdAt": "1749447921",
+      "paidAt": "1749447930",
+      "deliverPattern": {
+        "name": "入寄存柜",
+        "key": "HOST"
+      },
+      "buyer": {
+        "id": "539529582655676884",
+        "name": "可以收货放心",
+        "phone": "+86 181****562"
+      },
+      "seller": {
+        "id": "1",
+        "name": "***g",
+        "phone": ""
+      },
+      "receiver": {
+        "name": "",
+        "phone": "",
+        "address": "",
+        "province": "",
+        "city": "",
+        "district": ""
+      },
+      "pricing": {
+        "orderPrice": 157,
+        "expressPrice": 0,
+        "paidPrice": 157,
+        "originalPrice": 157,
+        "afterDiscountPrice": 157
+      },
+      "products": [
+        {
+          "productId": "748658708598359072",
+          "productName": "甜丝丝",
+          "unitPrice": 157,
+          "amount": 1,
+          "totalPrice": 157,
+          "description": "",
+          "specValues": [
+            {
+              "id": "163888",
+              "name": "状态",
+              "value": "拆袋已鉴别",
+              "color": "#C74A88",
+              "labelColor": "#F7DFEC"
+            }
+          ]
+        }
+      ],
+      "availableActions": [
+        {
+          "action": "OrderAction_APPLY_REFUND",
+          "actionName": "申请退款"
+        },
+        {
+          "action": "OrderAction_SHARE_ORDER",
+          "actionName": "标记拥有"
+        }
+      ],
+      "productNum": "1",
+      "relatedId": "872607396353032500",
+      "relatedType": "EXCHANGE",
+      "expiredAt": "0"
+    },
+    {
+      "orderId": "872633828686188371",
+      "status": {
+        "name": "交易成功",
+        "key": "BUYER_CONFIRM_GOODS"
+      },
+      "orderType": {
+        "name": "闪购",
+        "key": "EXCHANGE"
+      },
+      "createdAt": "1749447896",
+      "paidAt": "1749447912",
+      "deliverPattern": {
+        "name": "入寄存柜",
+        "key": "HOST"
+      },
+      "buyer": {
+        "id": "539529582655676884",
+        "name": "可以收货放心",
+        "phone": "+86 181****562"
+      },
+      "seller": {
+        "id": "1",
+        "name": "***g",
+        "phone": ""
+      },
+      "receiver": {
+        "name": "",
+        "phone": "",
+        "address": "",
+        "province": "",
+        "city": "",
+        "district": ""
+      },
+      "pricing": {
+        "orderPrice": 157,
+        "expressPrice": 0,
+        "paidPrice": 157,
+        "originalPrice": 157,
+        "afterDiscountPrice": 157
+      },
+      "products": [
+        {
+          "productId": "748658708598359072",
+          "productName": "甜丝丝",
+          "unitPrice": 157,
+          "amount": 1,
+          "totalPrice": 157,
+          "description": "",
+          "specValues": [
+            {
+              "id": "163888",
+              "name": "状态",
+              "value": "拆袋已鉴别",
+              "color": "#C74A88",
+              "labelColor": "#F7DFEC"
+            }
+          ]
+        }
+      ],
+      "availableActions": [
+        {
+          "action": "OrderAction_APPLY_REFUND",
+          "actionName": "申请退款"
+        },
+        {
+          "action": "OrderAction_SHARE_ORDER",
+          "actionName": "标记拥有"
+        }
+      ],
+      "productNum": "1",
+      "relatedId": "872607383468129673",
+      "relatedType": "EXCHANGE",
+      "expiredAt": "0"
+    }
+  ]
+}
