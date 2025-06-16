@@ -1,0 +1,31 @@
+POST /order-web/user/v3/load-order-list HTTP/1.1
+accept-encoding: gzip
+x-request-version: 5.91.1
+x-request-sign-type: RSA2
+authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijg2OTYxODI4Mzc5ODY1NDI2NiIsInR5cGUiOiJVU0VSIiwiZGV2aWNlSWQiOiIxMDA2IiwiZXhwIjoxNzQ5NzQ0NDMzLCJpYXQiOjE3NDk0ODUyMzN9.p6OGSZxmyVZVltKGuG13nXvYHOA3a_jQl7kcCkL8SxIXaRpwRxkG37V2Nyh1p9PpDpLESw7zmF_NhJ1SQkkBDR3MJS_WeaoWOE4ikxb15KqlTcf8dHsieuF0JHbsyWtCiIVydD42m6Q_81BKZJlLVeVNIY2D9aH_MB-a9awuUsiaWuIkpBBzkVDn7V8gBgkUd33a06jh6A9lIRu4Hk37cAYM8RXDh7jwMScTkbz2j5t45VOj9hVdrPLsjDb8HFy3JJzy86ApnPTy1R4T62SAbi_olqgB7ajk2RJlU7Nd79fNttETQrV54XUgFJOc7Z0O1pPGoZs6rQHlrCbCCsh2ng
+x-echo-teen-mode: false
+x-request-utm_source: xiaomi
+x-request-package-sign-version: 0.0.3
+x-request-id: 
+x-request-sign: sm+oqHOdC8vt4a2zUCDKBTV6qOK/xnTetSuymCGC8UPfDTPh0mqRL47p477Rfg5+hr93NgaiyLv1NH//ozQFtF70vrbuQXJe92ikAnX608xSVSw6cSsGnfXRxr72BlOdl1PxAZONn3V1NZzt8f+IQuUNgVYzuxQ3VBLI/UdhLCRNYXvoIv7XyKlmcaUN5Db9NTUCTwguBjJfBfsL7mfn2STnmC/pM5BaUKjP/9EcGLZs4fJRKAfYWh4fgJOGrC57J74GEoq/em5RBcD72bcmfLXJQMj5YHl04TZ0GT8t+yBPvsBajn7q/NFbm5KfZ5nx1zdAUTFnAAZhtPQQSpghkw==
+content-length: 376
+x-client-package-id: 1006
+x-request-package-id: 1006
+x-device-id: 6ec1e3cac888f55d
+user-agent: Kuril+/5.91.1 (Android 15)
+x-echo-install-id: ODY5NjE4MjM0NDA2NTAyOTQ5
+cache-control: max-age=3600
+x-echo-city-code: 
+content-type: application/json
+downloadchannel: xiaomi
+x-request-sign-version: v1
+referer: https://qiandao.cn
+x-request-channel: xiaomi
+x-echo-region: CN
+accept-language: zh-CN
+host: api.qiandao.cn
+x-request-device: android
+x-request-timestamp: 1749559596521
+x-request-version-code: 611
+
+{"limit":30,"sellerIdList":[],"buyerIdList":["869618283798654266"],"waitPayAppointmentExpress":false,"deliverPattern":null,"statusList":["REFUNDING","WAIT_SELLER_CONFIRM_ORDER","WAIT_BUYER_PAY","WAIT_SELLER_SEND_GOODS","WAIT_BUYER_CONFIRM_GOODS","BUYER_CONFIRM_GOODS","WAIT_REFUND","WAIT_RETURN_REFUND_APPROVE","WAIT_RETURN_REFUND_CONFIRM","WAIT_BUYER_RETURN_GOODS","LOCKED"]}

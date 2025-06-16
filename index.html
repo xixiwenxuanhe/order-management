@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>订单管理系统</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>📦 订单管理系统</h1>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-value" id="totalOrders">0</span>
+                    <span class="stat-label">总订单数</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="totalPages">0</span>
+                    <span class="stat-label">总页数</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="totalAmount">¥0</span>
+                    <span class="stat-label">总金额</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="filters">
+            <div class="filter-group">
+                <label for="statusFilter">订单状态:</label>
+                <select id="statusFilter">
+                    <option value="">全部状态</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="searchInput">搜索订单:</label>
+                <input type="text" id="searchInput" placeholder="输入订单ID、买家或卖家名称">
+            </div>
+
+            <div class="filter-group">
+                <label for="pageSelect">选择页面:</label>
+                <select id="pageSelect">
+                    <option value="">全部页面</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="orders-container">
+            <div id="ordersList" class="orders-list">
+                <!-- 订单列表将在这里动态生成 -->
+            </div>
+        </div>
+
+        <div class="pagination">
+            <button id="prevBtn" class="btn btn-secondary">上一页</button>
+            <span id="pageInfo" class="page-info">第 1 页，共 1 页</span>
+            <button id="nextBtn" class="btn btn-secondary">下一页</button>
+        </div>
+
+        <div class="loading" id="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>加载中...</p>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html> 
