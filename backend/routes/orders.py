@@ -7,6 +7,7 @@
 from fastapi import APIRouter, HTTPException
 from ..models.schemas import GetOrdersRequest, OrderResponse
 from ..models.services import fetch_orders_from_api
+from ..models.database import save_orders_to_database, get_order_count, get_record_count
 
 router = APIRouter(prefix="/api", tags=["orders"])
 
@@ -22,16 +23,39 @@ async def get_orders(request: GetOrdersRequest):
             last_id=request.last_id
         )
         
+        # 如果API请求成功，自动保存到数据库
+        db_result = save_orders_to_database(result_data["orders"])
+        message = f"获取订单数据成功，{db_result['message']}"
+        
         return OrderResponse(
             success=True,
-            message="获取订单数据成功",
+            message=message,
             data=result_data,
-            total_orders=result_data["pagination"]["count"]
+            total_orders=result_data["pagination"]["count"],
+            last_id=result_data["pagination"]["last_id"]
         )
         
-    except FileNotFoundError as e:
-        raise HTTPException(status_code=404, detail=f"文件不存在: {str(e)}")
     except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        error_msg = str(e)
+        if "验签失败" in error_msg:
+            raise HTTPException(status_code=401, detail="签名失效，请更新签名")
+        else:
+            raise HTTPException(status_code=400, detail=error_msg)
+
+@router.get("/db-stats")
+async def get_database_stats():
+    """获取数据库统计信息"""
+    try:
+        order_count = get_order_count()
+        record_count = get_record_count()
+        
+        return {
+            "success": True,
+            "message": "获取数据库统计信息成功",
+            "data": {
+                "total_orders": order_count,
+                "total_records": record_count
+            }
+        }
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"服务器内部错误: {str(e)}") 
+        raise HTTPException(status_code=500, detail=f"获取统计信息失败: {str(e)}") 

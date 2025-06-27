@@ -21,4 +21,5 @@ class OrderResponse(BaseModel):
     message: str
     data: Optional[Dict[str, Any]] = None
     total_orders: Optional[int] = None
+    last_id: Optional[str] = None
 
