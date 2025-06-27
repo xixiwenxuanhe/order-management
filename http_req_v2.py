@@ -106,7 +106,7 @@ def is_signature_error(resp):
     return False
 
 if __name__ == "__main__":
-    file_path = "http_req_think.hcy"
+    file_path = "backend/config/http_req_think.hcy"
     method, url, headers, body = parse_http_file(file_path)
     
     # 解析原始请求体获取limit
@@ -154,11 +154,11 @@ if __name__ == "__main__":
             current_body['lastId'] = last_id
         
         # 读取最新的签名信息
-        with open('x-request-timestamp.txt', 'r', encoding='utf-8') as f:
+        with open('backend/config/x-request-timestamp.txt', 'r', encoding='utf-8') as f:
             headers['x-request-timestamp'] = f.read().strip()
-        with open('x-request-sign.txt', 'r', encoding='utf-8') as f:
+        with open('backend/config/x-request-sign.txt', 'r', encoding='utf-8') as f:
             headers['x-request-sign'] = f.read().strip()
-        with open('authorization.txt', 'r', encoding='utf-8') as f:
+        with open('backend/config/authorization.txt', 'r', encoding='utf-8') as f:
             headers['authorization'] = f.read().strip()
         
         # 去掉 content-length，requests 会自动处理
