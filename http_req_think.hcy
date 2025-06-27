@@ -1,0 +1,31 @@
+POST /order-web/user/v3/load-order-list HTTP/1.1
+accept-encoding: gzip
+x-request-version: 5.91.1
+x-request-sign-type: RSA2
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUzOTUyOTU4MjY1NTY3Njg4NCIsInR5cGUiOiJVU0VSIiwiZGV2aWNlSWQiOiIxMDA2IiwiZXhwIjoxNzUwODkyMDExLCJpYXQiOjE3NTA2MzI4MTF9.yPWAtNHLmgZaQrroVsAHHza03Q-kpdVPhmVPlt_JQIU
+x-echo-teen-mode: false
+x-request-utm_source: xiaomi
+x-request-package-sign-version: 0.0.3
+x-request-id: 
+x-request-sign: azSK78XSFaEp4hAtUpkhe5h6g1eOVqnJc6knrUF+cArXaj9S5Lo87UwyPxaVoTAwVWli2sBQ+SoBu1S84j6GV11YQZOiJ7sGSo9CJQLUrULNS58FdIp1Pn3JYnJjmiPOw4cX3rgAkoksz5xIEc+aQqLnsBpaiO4hTcHhFS95RHEW01KoKYpT3gptc+l4y5Yg0Ljs77wf15ToZgk/FHig0d5g23GmBs7Md61Jn1TEH6qQh3cVtfsOv5x4HZ/gQsImgOE4H/jeO+qyPbHijpmZ7RSn6v/81ys59d+y9MmIynMTAq7XtPPUkgBXX3L2OMa8avJfHMuxLxQp/RygZvCIQQ==
+content-length: 376
+x-client-package-id: 1006
+x-request-package-id: 1006
+x-device-id: 6ec1e3cac888f55d
+user-agent: Kuril+/5.91.1 (Android 15)
+x-echo-install-id: ODY5NjE4MjM0NDA2NTAyOTQ5
+cache-control: max-age=3600
+x-echo-city-code: 
+content-type: application/json
+downloadchannel: xiaomi
+x-request-sign-version: v1
+referer: https://qiandao.cn
+x-request-channel: xiaomi
+x-echo-region: CN
+accept-language: zh-CN
+host: api.qiandao.cn
+x-request-device: android
+x-request-timestamp: 1750061173843
+x-request-version-code: 611
+
+{"limit":30,"sellerIdList":[],"waitPayAppointmentExpress":false,"deliverPattern":null,"statusList":["REFUNDING","WAIT_SELLER_CONFIRM_ORDER","WAIT_BUYER_PAY","WAIT_SELLER_SEND_GOODS","WAIT_BUYER_CONFIRM_GOODS","BUYER_CONFIRM_GOODS","WAIT_REFUND","WAIT_RETURN_REFUND_APPROVE","WAIT_RETURN_REFUND_CONFIRM","WAIT_BUYER_RETURN_GOODS","LOCKED"]}

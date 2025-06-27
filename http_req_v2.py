@@ -158,6 +158,8 @@ if __name__ == "__main__":
             headers['x-request-timestamp'] = f.read().strip()
         with open('x-request-sign.txt', 'r', encoding='utf-8') as f:
             headers['x-request-sign'] = f.read().strip()
+        with open('authorization.txt', 'r', encoding='utf-8') as f:
+            headers['authorization'] = f.read().strip()
         
         # 去掉 content-length，requests 会自动处理
         headers.pop('content-length', None)

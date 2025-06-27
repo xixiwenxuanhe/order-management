@@ -71,7 +71,7 @@ def optimize_orders_json(input_file='merged_orders.json',
         
         # 显示保留的字段信息
         print(f"\n📋 保留的关键字段:")
-        print("   🔹 订单信息: orderId, status, createdAt, buyer, seller, receiver, address")
+        print("   🔹 订单信息: orderId, status, createdAt, paidAt, buyer, seller, receiver, address")
         print("   🔹 价格信息: orderPrice, paidPrice, expressPrice")
         print("   🔹 商品信息: productName, cover, price, amount, description, specValues")
         
@@ -106,6 +106,7 @@ def extract_order_info(order_info):
         'orderId': order_info.get('orderId', ''),
         'status': status_info,
         'createdAt': order_info.get('createdAt', ''),
+        'paidAt': order_info.get('paidAt', ''),
         'buyer': buyer_info,
         'seller': seller_info,
         'receiver': order_info.get('receiver', ''),
