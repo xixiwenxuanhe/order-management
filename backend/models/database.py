@@ -36,7 +36,8 @@ def init_database():
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS orders_need_details (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            order_id TEXT UNIQUE NOT NULL
+            order_id TEXT UNIQUE NOT NULL,
+            Complete BOOLEAN DEFAULT FALSE
         )
     ''')
     
@@ -197,8 +198,9 @@ def get_orders_need_details():
     conn = sqlite3.connect(DB_PATH, timeout=30.0)
     cursor = conn.cursor()
     cursor.execute('''
-        SELECT order_id 
+        SELECT order_id, Complete 
         FROM orders_need_details 
+        WHERE Complete = FALSE
         ORDER BY id DESC
     ''')
     
@@ -207,7 +209,8 @@ def get_orders_need_details():
     
     return [
         {
-            "order_id": row[0]
+            "order_id": row[0],
+            "complete": row[1]
         }
         for row in results
     ]
