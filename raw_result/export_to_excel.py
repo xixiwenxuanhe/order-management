@@ -48,7 +48,7 @@ def export_orders_to_excel(json_file_path, excel_file_path):
         
         # 获取订单基本信息
         order_id = order_info.get('orderId', '')
-        created_at = timestamp_to_date(order_info.get('createdAt', ''))
+        paid_at = timestamp_to_date(order_info.get('paidAt', ''))
         status = order_info.get('status', {}).get('name', '')
         
         # 遍历每个商品
@@ -63,7 +63,7 @@ def export_orders_to_excel(json_file_path, excel_file_path):
             # 构建数据行
             row = {
                 '订单编号': order_id,
-                '下单日期': created_at,
+                '交易时间': paid_at,
                 '状态': status,
                 '商品名称': product_name,
                 '数量': amount,

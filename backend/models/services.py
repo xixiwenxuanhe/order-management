@@ -114,6 +114,7 @@ def fetch_orders_from_api(
     
     # 提取和优化订单数据
     optimized_data = []
+    raw_data = []  # 保存原始数据用于判断
     row_list = response_json.get('data', {}).get('rowList', [])
     
     for order in row_list:
@@ -127,16 +128,112 @@ def fetch_orders_from_api(
         }
         
         optimized_data.append(optimized_order)
+        raw_data.append(order)  # 保存原始订单数据
     
     # 提取orderIds用于分页
     order_ids, count, last_id = extract_order_ids_from_response(response_json)
     
     return {
         "orders": optimized_data,
+        "raw_orders": raw_data,  # 添加原始数据
         "pagination": {
             "count": count,
             "last_id": last_id,
             "has_more": count >= limit
         },
         "order_ids": order_ids
+    }
+
+def fetch_order_details_from_api(
+    x_request_sign: str,
+    x_request_timestamp: str,
+    authorization: str,
+    order_id: str
+) -> Dict[str, Any]:
+    """从API获取订单详情"""
+    
+    # 硬编码的API配置
+    url = "https://api.qiandao.cn/order-web/user/v3/load-order-details"
+    method = "POST"
+    
+    # 固定的请求头（与订单列表API完全一样）
+    headers = {
+        'accept-encoding': 'gzip',
+        'x-request-version': '5.91.1',
+        'x-request-sign-type': 'RSA2',
+        'x-echo-teen-mode': 'false',
+        'x-request-utm_source': 'xiaomi',
+        'x-request-package-sign-version': '0.0.3',
+        'x-request-id': '',
+        'x-client-package-id': '1006',
+        'x-request-package-id': '1006',
+        'x-device-id': '6ec1e3cac888f55d',
+        'user-agent': 'Kuril+/5.91.1 (Android 15)',
+        'x-echo-install-id': 'ODY5NjE4MjM0NDA2NTAyOTQ5',
+        'cache-control': 'max-age=3600',
+        'x-echo-city-code': '',
+        'content-type': 'application/json',
+        'downloadchannel': 'xiaomi',
+        'x-request-sign-version': 'v1',
+        'referer': 'https://qiandao.cn',
+        'x-request-channel': 'xiaomi',
+        'x-echo-region': 'CN',
+        'accept-language': 'zh-CN',
+        'host': 'api.qiandao.cn',
+        'x-request-device': 'android',
+        # 动态更新的认证信息
+        'x-request-timestamp': x_request_timestamp,
+        'x-request-sign': x_request_sign,
+        'authorization': authorization
+    }
+    
+    # 请求体只包含orderId
+    request_body = {
+        "orderId": order_id
+    }
+    
+    # 去掉 content-length，requests 会自动处理
+    headers.pop('content-length', None)
+    
+    # 发送请求
+    request_body_str = json.dumps(request_body, separators=(',', ':'))
+    
+    if method.upper() == 'POST':
+        resp = requests.post(url, headers=headers, data=request_body_str.encode('utf-8'))
+    elif method.upper() == 'GET':
+        resp = requests.get(url, headers=headers, params=request_body_str)
+    else:
+        raise ValueError(f"不支持的HTTP方法: {method}")
+    
+    # 检查是否为签名错误
+    if resp.status_code == 405:
+        try:
+            error_data = resp.json()
+            if error_data.get('errCode') == 'SIG.FAIL':
+                raise ValueError("验签失败，需要更新请求头")
+        except json.JSONDecodeError:
+            pass
+    
+    if resp.status_code != 200:
+        raise requests.RequestException(f"请求失败: {resp.status_code} - {resp.text}")
+    
+    response_json = resp.json()
+    
+    # 检查响应是否成功
+    if response_json.get('code') != 0:
+        raise ValueError(f"API返回错误: {response_json.get('message', '未知错误')}")
+    
+    # 提取和格式化订单详情数据
+    data = response_json.get('data', {})
+    details = data.get('details', {})
+    products = data.get('products', [])
+    
+    # 构造格式化的订单详情
+    formatted_order = {
+        'orderInfo': extract_order_info(details),
+        'products': extract_products_info(products)
+    }
+    
+    return {
+        "order_detail": formatted_order  # 单个订单详情对象
     } 

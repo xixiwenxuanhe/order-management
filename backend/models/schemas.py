@@ -15,6 +15,13 @@ class GetOrdersRequest(BaseModel):
     limit: Optional[int] = 30
     last_id: Optional[str] = None
 
+class GetOrderDetailsRequest(BaseModel):
+    """获取订单详情请求模型"""
+    x_request_sign: str
+    x_request_timestamp: str
+    authorization: str
+    order_id: str
+
 class OrderResponse(BaseModel):
     """订单响应模型"""
     success: bool
@@ -22,4 +29,10 @@ class OrderResponse(BaseModel):
     data: Optional[Dict[str, Any]] = None
     total_orders: Optional[int] = None
     last_id: Optional[str] = None
+
+class OrderDetailsResponse(BaseModel):
+    """订单详情响应模型"""
+    success: bool
+    message: str
+    data: Optional[Dict[str, Any]] = None
 

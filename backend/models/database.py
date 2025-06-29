@@ -22,7 +22,7 @@ def init_database():
         CREATE TABLE IF NOT EXISTS order_products (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             订单编号 TEXT NOT NULL,
-            下单日期 TEXT,
+            交易时间 TEXT,
             状态 TEXT,
             商品名称 TEXT,
             数量 INTEGER,
@@ -32,8 +32,17 @@ def init_database():
         )
     ''')
     
+    # 创建需要详细显示的订单表
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS orders_need_details (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            order_id TEXT UNIQUE NOT NULL
+        )
+    ''')
+    
     # 创建索引
     cursor.execute('CREATE INDEX IF NOT EXISTS idx_order_id ON order_products (订单编号)')
+    cursor.execute('CREATE INDEX IF NOT EXISTS idx_need_details_order_id ON orders_need_details (order_id)')
     
     conn.commit()
     conn.close()
@@ -48,21 +57,47 @@ def timestamp_to_date(timestamp_str):
     except:
         return timestamp_str
 
-def save_orders_to_database(orders_data: List[Dict[str, Any]]):
+def save_orders_to_database(orders_data: List[Dict[str, Any]], raw_orders_data: List[Dict[str, Any]] = None):
     """保存订单数据到数据库"""
-    conn = sqlite3.connect(DB_PATH)
+    
+    conn = sqlite3.connect(DB_PATH, timeout=30.0)  # 增加超时时间
     cursor = conn.cursor()
     
     saved_records = 0
+    orders_need_details_count = 0
     
     try:
-        for order in orders_data:
+        for i, order in enumerate(orders_data):
             order_info = order.get('orderInfo', {})
             products = order.get('products', [])
             
             # 获取订单基本信息
             order_id = order_info.get('orderId', '')
             if not order_id:
+                continue
+            
+            # 获取原始数据中的productNum用于判断
+            product_num = 0
+            if raw_orders_data and i < len(raw_orders_data):
+                raw_order = raw_orders_data[i]
+                product_num = int(raw_order.get('productNum', 0))
+            
+            # 计算products数组中所有商品的数量总和
+            actual_products_total = sum(product.get('amount', 0) for product in products)
+            
+            # 判断是否需要详细显示：如果productNum大于实际商品总数，说明有商品没显示完整
+            if product_num > actual_products_total:
+                # 保存到需要详细显示的订单表 - 使用当前连接
+                try:
+                    cursor.execute('''
+                        INSERT OR REPLACE INTO orders_need_details 
+                        (order_id)
+                        VALUES (?)
+                    ''', (order_id,))
+                    orders_need_details_count += 1
+                except Exception as e:
+                    print(f"保存需要详细显示的订单失败: {str(e)}")
+                # 跳过保存到主表
                 continue
                 
             paid_at = timestamp_to_date(order_info.get('paidAt', ''))
@@ -71,28 +106,45 @@ def save_orders_to_database(orders_data: List[Dict[str, Any]]):
             # 删除该订单的旧记录
             cursor.execute('DELETE FROM order_products WHERE 订单编号 = ?', (order_id,))
             
-            # 插入每个商品记录（与Excel格式完全一致）
-            for product in products:
-                product_name = product.get('productName', '')
-                amount = product.get('amount', 0)
-                price = product.get('price', 0)
-                total_amount = price * amount
-                
-                # 判断是否为交易成功
+            # 检查是否有商品，如果没有商品则插入一条空记录
+            if not products:
+                # 没有商品的情况，插入一条订单记录但商品信息为空
                 is_complete = status == "交易成功"
-                
                 cursor.execute('''
                     INSERT INTO order_products 
-                    (订单编号, 下单日期, 状态, 商品名称, 数量, 单价, 金额, Complete)
+                    (订单编号, 交易时间, 状态, 商品名称, 数量, 单价, 金额, Complete)
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-                ''', (order_id, paid_at, status, product_name, amount, price, total_amount, is_complete))
-                
+                ''', (order_id, paid_at, status, '', 0, 0, 0, is_complete))
                 saved_records += 1
+            else:
+                # 插入每个商品记录（与Excel格式完全一致）
+                for product in products:
+                    product_name = product.get('productName', '')
+                    amount = product.get('amount', 0)
+                    price = product.get('price', 0)
+                    total_amount = price * amount
+                    
+                    # 判断是否为交易成功
+                    is_complete = status == "交易成功"
+                    
+                    cursor.execute('''
+                        INSERT INTO order_products 
+                        (订单编号, 交易时间, 状态, 商品名称, 数量, 单价, 金额, Complete)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                    ''', (order_id, paid_at, status, product_name, amount, price, total_amount, is_complete))
+                    
+                    saved_records += 1
         
         conn.commit()
+        
+        message_parts = [f"成功保存 {saved_records} 条记录到数据库"]
+        if orders_need_details_count > 0:
+            message_parts.append(f"发现 {orders_need_details_count} 个订单需要详细显示")
+        
         return {
             "saved_records": saved_records,
-            "message": f"成功保存 {saved_records} 条记录到数据库"
+            "orders_need_details_count": orders_need_details_count,
+            "message": "，".join(message_parts)
         }
         
     except Exception as e:
@@ -103,7 +155,7 @@ def save_orders_to_database(orders_data: List[Dict[str, Any]]):
 
 def get_record_count():
     """获取记录总数"""
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, timeout=30.0)
     cursor = conn.cursor()
     cursor.execute('SELECT COUNT(*) FROM order_products')
     count = cursor.fetchone()[0]
@@ -112,15 +164,54 @@ def get_record_count():
 
 def get_order_count():
     """获取订单总数（去重）"""
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, timeout=30.0)
     cursor = conn.cursor()
     cursor.execute('SELECT COUNT(DISTINCT 订单编号) FROM order_products')
     count = cursor.fetchone()[0]
     conn.close()
     return count
 
+def save_order_need_details(order_id: str):
+    """保存需要详细显示的订单ID"""
+    conn = sqlite3.connect(DB_PATH, timeout=30.0)
+    cursor = conn.cursor()
+    
+    try:
+        cursor.execute('''
+            INSERT OR REPLACE INTO orders_need_details 
+            (order_id)
+            VALUES (?)
+        ''', (order_id,))
+        
+        conn.commit()
+        return True
+    except Exception as e:
+        conn.rollback()
+        print(f"保存需要详细显示的订单失败: {str(e)}")
+        return False
+    finally:
+        conn.close()
 
+def get_orders_need_details():
+    """获取需要详细显示的订单列表"""
+    conn = sqlite3.connect(DB_PATH, timeout=30.0)
+    cursor = conn.cursor()
+    cursor.execute('''
+        SELECT order_id 
+        FROM orders_need_details 
+        ORDER BY id DESC
+    ''')
+    
+    results = cursor.fetchall()
+    conn.close()
+    
+    return [
+        {
+            "order_id": row[0]
+        }
+        for row in results
+    ]
 
-# 初始化数据库
+# 模块导入时自动检查并初始化数据库
 if not os.path.exists(DB_PATH):
-    init_database() 
+    init_database()
