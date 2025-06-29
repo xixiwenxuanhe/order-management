@@ -177,21 +177,21 @@ def get_database_status():
         latest_time_result = cursor.fetchone()
         latest_time = latest_time_result[0] if latest_time_result and latest_time_result[0] else None
         
-        # 获取状态不为"交易成功"的记录的最早时间
+        # 获取状态不为"交易成功"且不为"交易关闭"的记录的最早时间
         cursor.execute('''
             SELECT MIN(交易时间) 
             FROM order_products 
-            WHERE 状态 != "交易成功" 
+            WHERE 状态 != "交易成功" AND 状态 != "交易关闭"
             AND 交易时间 IS NOT NULL AND 交易时间 != ""
         ''')
         incomplete_earliest_time_result = cursor.fetchone()
         incomplete_earliest_time = incomplete_earliest_time_result[0] if incomplete_earliest_time_result and incomplete_earliest_time_result[0] else None
         
-        # 获取状态不为"交易成功"的记录中最早的那条对应的订单ID
+        # 获取状态不为"交易成功"且不为"交易关闭"的记录中最早的那条对应的订单ID
         cursor.execute('''
             SELECT 订单编号 
             FROM order_products 
-            WHERE 状态 != "交易成功" 
+            WHERE 状态 != "交易成功" AND 状态 != "交易关闭"
             AND 交易时间 IS NOT NULL AND 交易时间 != ""
             ORDER BY 交易时间 ASC
             LIMIT 1
@@ -213,13 +213,24 @@ def get_database_status():
         latest_order_result = cursor.fetchone()
         latest_order_id = latest_order_result[0] if latest_order_result else None
         
+        # 获取所有非交易成功且非交易关闭的订单ID数组
+        cursor.execute('''
+            SELECT DISTINCT 订单编号 
+            FROM order_products 
+            WHERE 状态 != "交易成功" AND 状态 != "交易关闭"
+            AND 交易时间 IS NOT NULL AND 交易时间 != ""
+            ORDER BY 交易时间 ASC
+        ''')
+        incomplete_order_ids = [row[0] for row in cursor.fetchall()]
+        
         return {
             "total_records": total_records,
             "total_orders": total_orders,
             "latest_time": latest_time,
             "latest_order_id": latest_order_id,
             "incomplete_earliest_time": incomplete_earliest_time,
-            "incomplete_earliest_order_id": incomplete_earliest_order_id
+            "incomplete_earliest_order_id": incomplete_earliest_order_id,
+            "incomplete_order_ids": incomplete_order_ids
         }
         
     finally:
