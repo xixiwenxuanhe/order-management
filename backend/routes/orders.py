@@ -7,7 +7,7 @@
 from fastapi import APIRouter, HTTPException
 from ..models.schemas import GetOrdersRequest, OrderResponse, GetOrderDetailsRequest, OrderDetailsResponse
 from ..models.services import fetch_orders_from_api, fetch_order_details_from_api
-from ..models.database import save_orders_to_database, get_order_count, get_record_count, get_orders_need_details
+from ..models.database import save_orders_to_database, get_order_count, get_record_count, get_orders_need_details, get_database_status
 
 router = APIRouter(prefix="/api", tags=["orders"])
 
@@ -87,16 +87,18 @@ async def get_orders_need_details_list():
 async def get_database_stats():
     """获取数据库统计信息"""
     try:
-        order_count = get_order_count()
-        record_count = get_record_count()
+        status = get_database_status()
         need_details_orders = get_orders_need_details()
         
         return {
             "success": True,
             "message": "获取数据库统计信息成功",
             "data": {
-                "total_orders": order_count,
-                "total_records": record_count,
+                "total_orders": status["total_orders"],
+                "total_records": status["total_records"],
+                "latest_time": status["latest_time"],
+                "incomplete_earliest_time": status["incomplete_earliest_time"],
+                "incomplete_earliest_order_id": status["incomplete_earliest_order_id"],
                 "orders_need_details": len(need_details_orders)
             }
         }

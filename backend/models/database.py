@@ -154,23 +154,71 @@ def save_orders_to_database(orders_data: List[Dict[str, Any]], raw_orders_data: 
     finally:
         conn.close()
 
-def get_record_count():
-    """获取记录总数"""
+def get_database_status():
+    """获取数据库状态信息"""
     conn = sqlite3.connect(DB_PATH, timeout=30.0)
     cursor = conn.cursor()
-    cursor.execute('SELECT COUNT(*) FROM order_products')
-    count = cursor.fetchone()[0]
-    conn.close()
-    return count
+    
+    try:
+        # 获取记录总数
+        cursor.execute('SELECT COUNT(*) FROM order_products')
+        total_records = cursor.fetchone()[0]
+        
+        # 获取订单总数（去重）
+        cursor.execute('SELECT COUNT(DISTINCT 订单编号) FROM order_products')
+        total_orders = cursor.fetchone()[0]
+        
+        # 获取所有记录的最后时间（最近的时间）
+        cursor.execute('''
+            SELECT MAX(交易时间) 
+            FROM order_products 
+            WHERE 交易时间 IS NOT NULL AND 交易时间 != ""
+        ''')
+        latest_time_result = cursor.fetchone()
+        latest_time = latest_time_result[0] if latest_time_result and latest_time_result[0] else None
+        
+        # 获取状态不为"交易成功"的记录的最早时间
+        cursor.execute('''
+            SELECT MIN(交易时间) 
+            FROM order_products 
+            WHERE 状态 != "交易成功" 
+            AND 交易时间 IS NOT NULL AND 交易时间 != ""
+        ''')
+        incomplete_earliest_time_result = cursor.fetchone()
+        incomplete_earliest_time = incomplete_earliest_time_result[0] if incomplete_earliest_time_result and incomplete_earliest_time_result[0] else None
+        
+        # 获取状态不为"交易成功"的记录中最早的那条对应的订单ID
+        cursor.execute('''
+            SELECT 订单编号 
+            FROM order_products 
+            WHERE 状态 != "交易成功" 
+            AND 交易时间 IS NOT NULL AND 交易时间 != ""
+            ORDER BY 交易时间 ASC
+            LIMIT 1
+        ''')
+        incomplete_earliest_order_result = cursor.fetchone()
+        incomplete_earliest_order_id = incomplete_earliest_order_result[0] if incomplete_earliest_order_result else None
+        
+        return {
+            "total_records": total_records,
+            "total_orders": total_orders,
+            "latest_time": latest_time,
+            "incomplete_earliest_time": incomplete_earliest_time,
+            "incomplete_earliest_order_id": incomplete_earliest_order_id
+        }
+        
+    finally:
+        conn.close()
+
+def get_record_count():
+    """获取记录总数（保持兼容性）"""
+    status = get_database_status()
+    return status["total_records"]
 
 def get_order_count():
-    """获取订单总数（去重）"""
-    conn = sqlite3.connect(DB_PATH, timeout=30.0)
-    cursor = conn.cursor()
-    cursor.execute('SELECT COUNT(DISTINCT 订单编号) FROM order_products')
-    count = cursor.fetchone()[0]
-    conn.close()
-    return count
+    """获取订单总数（保持兼容性）"""
+    status = get_database_status()
+    return status["total_orders"]
 
 def save_order_need_details(order_id: str):
     """保存需要详细显示的订单ID"""
