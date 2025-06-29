@@ -36,3 +36,12 @@ class OrderDetailsResponse(BaseModel):
     message: str
     data: Optional[Dict[str, Any]] = None
 
+class UpdateOrdersRequest(BaseModel):
+    """更新订单请求模型"""
+    x_request_sign: str
+    x_request_timestamp: str
+    authorization: str
+    target_order_id: str  # 目标订单ID
+    limit: Optional[int] = 30
+    last_id: Optional[str] = None
+

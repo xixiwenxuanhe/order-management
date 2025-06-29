@@ -5,9 +5,9 @@
 """
 
 from fastapi import APIRouter, HTTPException
-from ..models.schemas import GetOrdersRequest, OrderResponse, GetOrderDetailsRequest, OrderDetailsResponse
+from ..models.schemas import GetOrdersRequest, OrderResponse, GetOrderDetailsRequest, OrderDetailsResponse, UpdateOrdersRequest
 from ..models.services import fetch_orders_from_api, fetch_order_details_from_api
-from ..models.database import save_orders_to_database, get_order_count, get_record_count, get_orders_need_details, get_database_status
+from ..models.database import save_orders_to_database, get_order_count, get_record_count, get_orders_need_details, get_database_status, update_orders_from_target
 
 router = APIRouter(prefix="/api", tags=["orders"])
 
@@ -97,10 +97,53 @@ async def get_database_stats():
                 "total_orders": status["total_orders"],
                 "total_records": status["total_records"],
                 "latest_time": status["latest_time"],
+                "latest_order_id": status["latest_order_id"],
                 "incomplete_earliest_time": status["incomplete_earliest_time"],
                 "incomplete_earliest_order_id": status["incomplete_earliest_order_id"],
                 "orders_need_details": len(need_details_orders)
             }
         }
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"获取统计信息失败: {str(e)}") 
+        raise HTTPException(status_code=500, detail=f"获取统计信息失败: {str(e)}")
+
+@router.post("/update-orders", response_model=OrderResponse)
+async def update_orders(request: UpdateOrdersRequest):
+    """更新订单数据接口"""
+    try:
+        # 获取订单数据
+        result_data = fetch_orders_from_api(
+            x_request_sign=request.x_request_sign,
+            x_request_timestamp=request.x_request_timestamp,
+            authorization=request.authorization,
+            limit=request.limit,
+            last_id=request.last_id
+        )
+        
+        # 使用新的更新函数处理数据
+        db_result = update_orders_from_target(
+            orders_data=result_data["orders"], 
+            target_order_id=request.target_order_id,
+            raw_orders_data=result_data["raw_orders"]
+        )
+        
+        return OrderResponse(
+            success=True,
+            message=f"更新订单数据成功，{db_result['message']}",
+            data={
+                "saved_records": db_result["saved_records"],
+                "updated_records": db_result["updated_records"],
+                "orders_need_details_count": db_result["orders_need_details_count"],
+                "target_order_id": request.target_order_id
+            },
+            total_orders=result_data["pagination"]["count"],
+            last_id=result_data["pagination"]["last_id"]
+        )
+        
+    except ValueError as e:
+        error_msg = str(e)
+        if "验签失败" in error_msg:
+            raise HTTPException(status_code=401, detail="签名失效，请更新签名")
+        else:
+            raise HTTPException(status_code=400, detail=error_msg)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"更新订单失败: {str(e)}") 
